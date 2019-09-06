@@ -53,7 +53,9 @@ def main(argv):
   backends_healthy, backends_sick = [], []
   for line in backends:
     if line.startswith("boot") and line.find("test")==-1:
-      if line.find("Healthy") != -1:
+      if line.find("healthy") != -1:
+        backends_healthy.append(line.split(" ")[0])
+      elif line.find("5/5 good") != -1:
         backends_healthy.append(line.split(" ")[0])
       else:
         backends_sick.append(line.split(" ")[0])
